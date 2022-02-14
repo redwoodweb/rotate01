@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>rotate page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div id="wrap">
+      <header>
+        <h1>
+          <a href="#">
+            <img src="./img/logo.svg" alt="">
+          </a>
+        </h1>
+        <nav id="gnb">
+          <ul>
+            <li><a href="#">Find a heineken</a></li>
+            <li><a href="#">Our story</a></li>
+            <li><a href="#">Sponsorships</a></li>
+            <li><a href="#">Our products</a></li>
+          </nav>
+        </nav>
+      </header>
+      <main>
+        <section>
+          <nav id="pagenation">
+            <ul>
+              <li class="active"><img class="active" src="./img/img01.png" alt="img01" title="Original"></li>
+              <li><img src="./img/img02.png" alt="img02" title="Heineken® 0.0"></li>
+              <li><img src="./img/img03.png" alt="img03" title="Light"></li>
+              <li><img src="./img/img04.png" alt="img04" title="The Can"></li>
+            </ul>
+          </nav>
+          <div class="items change-img">
+            <img src="./img/img01.png">
+          </div>
+          <div class="items text">
+            <h2>The Original</h2>
+            <p class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a href="#">discover more</a>
+          </div>
+          <div class="rotate-items">
+            <ul>
+              <li style="--i:1;"><span>The Can</span></li>
+              <li style="--i:2;"><span>Light</span></li>
+              <li style="--i:3;"><span>Heineken® 0.0</span></li>
+              <li style="--i:4;"><span>Original</span></li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="text/javascript">
+      let selectElem = document.querySelectorAll('#pagenation ul li');
+      let textElem = document.querySelector('.text h2');
+      let descElem = document.querySelector('.text .desc');
+      let imgElem = document.querySelector('.change-img img');
+      let rotateElem = document.querySelector('.rotate-items ul');
+      const descAarry = []
+      descAarry[0] = 'Always refreshing to see something you recognise. Cold, fresh, high quality Heineken®. Enjoyed near and far since 1873.'
+      descAarry[1] = 'No alcohol, 100% Heineken®. We are proud of our Heineken® 0.0. Brewed with devotion and our heritage knowledge of beer.'
+      descAarry[2] = 'Not just any light beer. An award-winning light beer.'
+      descAarry[3] = 'On the beach, at a party or on the go? Feel and enjoy wherever you are a true touch of class with a cold can of Heineken®, the refreshing taste that is kept safe from light and air.'
+
+      selectElem.forEach((items,i) => {
+        items.onclick = function(){
+          selectElem.forEach(check => {
+            check.classList.remove('active')
+          })
+          items.classList.add('active');
+          let src = items.firstChild.getAttribute('src')
+          let title = items.firstChild.getAttribute('title')
+          imgElem.setAttribute('src',`${src}`);
+          textElem.innerHTML = `"${title}"`;
+          descElem.innerHTML = `"${descAarry[i]}"`;
+          rotateElem.style.transform = `rotate(${i*90}deg)`;
+        }
+      })
+    </script>
+  </body>
+</html>
